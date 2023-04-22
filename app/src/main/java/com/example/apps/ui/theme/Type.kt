@@ -1,10 +1,36 @@
 package com.example.apps.ui.theme
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.apps.R
+
+
+val Lato = FontFamily(
+    Font(
+        resId = R.font.lato_bold,
+        style = FontStyle.Normal,
+        weight = FontWeight.Bold
+    )
+)
+
+val Montserrat = FontFamily(
+    Font(
+        resId = R.font.montserrat_light,
+        style = FontStyle.Normal,
+        weight = FontWeight.Normal
+    )
+)
+
+
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -14,6 +40,16 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = Montserrat,
+        fontSize = 36.sp,
+        fontWeight = FontWeight.Normal
+    ),
+    displaySmall = TextStyle(
+        fontFamily = Lato,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
@@ -32,3 +68,19 @@ val Typography = Typography(
     )
     */
 )
+
+@Preview(
+    showSystemUi = true
+)
+@Composable fun TypographyPreview() {
+    Column {
+        Text(
+            text = "Title Large",
+            style = Typography.titleLarge
+        )
+        Text(
+            text = "Display Small",
+            style = Typography.displaySmall
+        )
+    }
+}
