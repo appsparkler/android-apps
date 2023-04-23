@@ -1,9 +1,10 @@
 package com.example.apps.ui.theme
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Text
-import androidx.compose.material3.Typography
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -26,7 +27,7 @@ val Montserrat = FontFamily(
     Font(
         resId = R.font.montserrat_light,
         style = FontStyle.Normal,
-        weight = FontWeight.Normal
+        weight = FontWeight.Light
     )
 )
 
@@ -43,8 +44,8 @@ val Typography = Typography(
     ),
     titleLarge = TextStyle(
         fontFamily = Montserrat,
-        fontSize = 36.sp,
-        fontWeight = FontWeight.Normal
+        fontSize = 60.sp,
+        fontWeight = FontWeight.Light
     ),
     displaySmall = TextStyle(
         fontFamily = Lato,
@@ -69,18 +70,25 @@ val Typography = Typography(
     */
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview(
     showSystemUi = true
 )
 @Composable fun TypographyPreview() {
-    Column {
-        Text(
-            text = "Title Large",
-            style = Typography.titleLarge
-        )
-        Text(
-            text = "Display Small",
-            style = Typography.displaySmall
-        )
+    AppTheme() {
+        Scaffold {
+            Column(
+                modifier = Modifier.padding(it)
+            ) {
+                Text(
+                    text = "Title Large",
+                    style = Typography.titleLarge
+                )
+                Text(
+                    text = "Display Small",
+                    style = Typography.displaySmall
+                )
+            }
+        }
     }
 }
