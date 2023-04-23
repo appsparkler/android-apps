@@ -1,19 +1,18 @@
 package com.example.apps.components
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.apps.R
+import com.example.apps.data.DeveloperInfo
+import com.example.apps.data.devInfo
 import com.example.apps.ui.theme.AppTheme
 import com.example.apps.ui.theme.Lato
 
@@ -21,7 +20,7 @@ import com.example.apps.ui.theme.Lato
 private fun InfoRow(
     modifier: Modifier = Modifier,
     @DrawableRes iconId: Int,
-    @StringRes contentId: Int,
+    infoStr: String,
 ) {
     Column(modifier = modifier) {
         Divider(
@@ -31,7 +30,7 @@ private fun InfoRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp),
+                .padding(vertical = 12.dp),
         ) {
             Icon(
                 painter = painterResource(id = iconId),
@@ -42,7 +41,7 @@ private fun InfoRow(
                 tint = MaterialTheme.colorScheme.primary
             )
             Text(
-                text = stringResource(id = contentId),
+                text = infoStr,
                 fontFamily = Lato,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
@@ -63,29 +62,82 @@ private fun InfoRowPreview(darkTheme: Boolean = false) {
                     .padding(it)
             ) {
                 InfoRow(
-                   iconId = R.drawable.phone_iphone_android_48px,
-                    contentId = R.string.mobile_number
+                    iconId = R.drawable.phone_iphone_48px,
+                    infoStr = devInfo.data.mobileNumber
                 )
                 InfoRow(
                     iconId = R.drawable.share_48px,
-                    contentId = R.string.social_media
+                    infoStr = devInfo.data.socialMediaHandle
                 )
                 InfoRow(
                     modifier = Modifier
                         .padding(it),
                     iconId = R.drawable.mail_48px,
-                    contentId = R.string.email
+                    infoStr = devInfo.data.email
                 )
             }
         }
     }
 }
 
-@Preview(showSystemUi = true)
 @Composable
-fun DarkPreview() {
-    InfoRowPreview(true)
+fun InfoColumn(
+    modifier: Modifier = Modifier,
+    developerInfo: DeveloperInfo
+) {
+    Column(
+        modifier = modifier,
+    ) {
+        InfoRow(
+            iconId = R.drawable.phone_iphone_48px,
+            infoStr = developerInfo.mobileNumber
+        )
+        InfoRow(
+            iconId = R.drawable.share_48px,
+            infoStr = developerInfo.socialMediaHandle
+        )
+        InfoRow(
+            iconId = R.drawable.mail_48px,
+            infoStr = developerInfo.email
+        )
+    }
 }
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun InfoColumnPreview(useDarkTheme: Boolean = false) {
+    AppTheme(useDarkTheme) {
+        Scaffold {
+            Column(
+                modifier = Modifier.fillMaxHeight(),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Hello World",
+                    modifier = Modifier
+                        .padding(top = 200.dp)
+                )
+                InfoColumn(
+                    modifier = Modifier.padding(it),
+                    developerInfo = devInfo.data
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun ThemedInfoColumnPreview() {
+    InfoColumnPreview(false)
+}
+
+
+//@Preview(showSystemUi = true)
+//@Composable
+//fun DarkPreview() {
+//    InfoRowPreview(true)
+//}
 
 //@Preview(showSystemUi = true)
 //@Composable
