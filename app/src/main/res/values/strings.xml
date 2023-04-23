@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Apps</string>
+
+    <string name="android">android</string>
+
     <string name="developer_name">Aakash Shah</string>
+    <string name="punchline">Android Developer Extraordinaire</string>
+
     <string name="mobile_number">+91 733 8080 855</string>
     <string name="email">appsparkler@gmail.com</string>
     <string name="social_media">\@appsparkler</string>
